@@ -1,0 +1,95 @@
+Question 1: Write a short summary of the performance you observed using the two search
+algorithms.
+    When the word being searched for is close to the beginning ot the text brute force was faster, but in all other cases
+    KMP was faster. When the search pattern was relatively long and not at the beginning of the text KMP is significantly
+    faster, e.g. searching for "into the part of" in 'war_and_peace.txt' KMP took 4ms where brute force took 94ms.
+
+Question 2: Report the binary tree of codes your algorithm generates, and the final size of
+War and Peace after Huffman coding
+    output length: 1848598 bytes
+
+    e: 000
+    s: 0010
+    h: 0011
+    i: 0100
+    n: 0101
+    k: 0110000
+    C: 01100010000
+    E: 01100010001
+    W: 0110001001
+    P: 011000101
+    A: 011000110
+    ): 011000111000
+    8: 01100011100100
+    5: 0110001110010100
+    4: 01100011100101010
+    ê: 011000111001010110
+    à: 0110001110010101110
+    ﻿: 011000111001010111100
+    ä: 0110001110010101111010
+    é: 0110001110010101111011
+    /: 011000111001010111110
+    =: 011000111001010111111
+    6: 0110001110010110
+    3: 0110001110010111
+    U: 01100011100110
+    Z: 011000111001110
+    X: 01100011100111100
+    9: 01100011100111101
+    7: 01100011100111110
+    Q: 01100011100111111
+    O: 01100011101
+    S: 0110001111
+    y: 011001
+    l: 01101
+    o: 0111
+    a: 1000
+    g: 100100
+    T: 100101000
+    -: 100101001
+    ?: 1001010100
+    M: 1001010101
+    I: 100101011
+    v: 1001011
+    f: 100110
+    w: 100111
+    t: 1010
+    d: 10110
+    m: 101110
+    c: 101111
+     : 110
+    N: 1110000000
+    B: 1110000001
+    V: 111000001000
+    :: 111000001001
+    F: 11100000101
+    H: 1110000011
+    ': 111000010
+    x: 1110000110
+    !: 1110000111
+    .: 1110001
+    : 111001
+
+    : 111010
+    u: 111011
+    r: 11110
+    b: 1111100
+    ": 11111010
+    D: 11111011000
+    j: 11111011001
+    2: 111110110100000
+    0: 111110110100001
+    1: 11111011010001
+    *: 11111011010010
+    J: 11111011010011
+    ;: 111110110101
+    R: 11111011011
+    z: 11111011100
+    q: 11111011101
+    K: 111110111100
+    G: 111110111101
+    Y: 111110111110
+    L: 1111101111110
+    (: 1111101111111
+    p: 1111110
+    ,: 1111111
