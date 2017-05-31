@@ -1,8 +1,9 @@
 Question 1: Write a short summary of the performance you observed using the two search
 algorithms.
-    When the word being searched for is close to the beginning ot the text brute force was faster, but in all other cases
-    KMP was faster. When the search pattern was relatively long and not at the beginning of the text KMP is significantly
-    faster, e.g. searching for "into the part of" in 'war_and_peace.txt' KMP took 4ms where brute force took 94ms.
+    When the word being searched for is close to the beginning of the text (or the textis very short) brute force was
+    faster, but in all other cases KMP was faster. When the search pattern was relatively long and not at the beginning
+    of the text KMP is significantly faster, e.g. searching for "into the part of" in 'war_and_peace.txt' KMP took 4ms
+    where brute force took 94ms.
 
 Question 2: Report the binary tree of codes your algorithm generates, and the final size of
 War and Peace after Huffman coding

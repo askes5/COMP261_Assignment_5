@@ -48,7 +48,7 @@ public class HuffmanCoding {
         StringBuilder currentCode = new StringBuilder();
         for (char character : characters) {
             currentCode.append(character);
-            if (inverseDictionary.get(currentCode.toString()) != null){
+            if (inverseDictionary.containsKey(currentCode.toString())){
                 output.append(inverseDictionary.get(currentCode.toString()));
                 currentCode = new StringBuilder();
             }
