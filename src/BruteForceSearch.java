@@ -30,7 +30,10 @@ public class BruteForceSearch {
         for (int i = 0; i < text.length()-pattern.length(); i++) {
             boolean isMatch = true;
             for (int j = 0; j < pattern.length(); j++) {
-                if(text.charAt(i+j) != pattern.charAt(j)) isMatch = false;
+                if(text.charAt(i+j) != pattern.charAt(j)) {
+                    isMatch = false;
+                    break;
+                }
             }
             if (isMatch) return i;
         }

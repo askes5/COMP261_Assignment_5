@@ -17,6 +17,7 @@ public class HuffmanCoding {
     
     /**
      * This would be a good place to compute and store the tree.
+     * @param text the text used to generate the dictonary
      */
     public HuffmanCoding(String text) {
         rootNode = generateTree(text);
@@ -28,6 +29,7 @@ public class HuffmanCoding {
      * Take an input string, text, and encode it with the stored tree. Should
      * return the encoded text as a binary string, that is, a string containing
      * only 1 and 0.
+     * @param text the text to be encoded
      */
     public String encode(String text) {
         char[] chars = text.toCharArray();
@@ -119,5 +121,11 @@ public class HuffmanCoding {
         public int compareTo(Node o) {
             return this.weight - o.weight;
         }
+    }
+
+    public static void main (String args[]){
+        String text = "mamma mia by abba";
+        HuffmanCoding huffmanCoding = new HuffmanCoding(text);
+        System.out.println(huffmanCoding.encode(text));
     }
 }

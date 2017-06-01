@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * A new instance of LempelZiv is created for every run.
  */
@@ -7,61 +9,49 @@ public class LempelZiv {
      * text string.
      */
     public String compress(String input) {
-//        StringBuilder s = new StringBuilder();
-        StringBuilder out = new StringBuilder();
-//        char ch;
-//        List<char[]> dictionary = new ArrayList<>();
-//        char[] in = input.toCharArray();
-//        for (int i = 0; i < in.length; i++) {
-//            dictionary.add(new char[]{in[i]});
-//        }
-//        for (int i = 0; i < in.length ; i++){
-//            ch = in[i];
-//            if (dictionary.contains((s.toString() + ch).toCharArray())) {
-//                s.append(ch);
-//            } else {
-//                out.append("[").append(s.toString()).append("]");
-//                dictionary.add((s.toString()+ch).toCharArray());
-//                s = new StringBuilder().append(ch);
-//            }
-//        }
-//        out.append(s.toString());
-//        return out.toString();
 
-//        cursor <- 0
+        StringBuilder out = new StringBuilder();
+        char[] charArray = input.toCharArray();
+        String behind;
         int cursor = 0;
-//        windowSize <- 100 // some suitable size
-        final int WINDOW_SIZE = 1;//input.length()/2;
-//        while cursor < text.size
-        while (cursor < input.length()) {
-//            lookahead <- 0
-            int lookAHead = 0;
-//            prevMatch <- 0
-            int prevMatch = 0;
-//            loop
-            while (true) {
-//                match <- stringMatch( text[cursor.. cursor+lookahead],
-//                text[(cursor<windowSize)?0:cursor-windowSize .. cursor-1] )
-                int match = input.substring(cursor,cursor+lookAHead).indexOf(input.substring((cursor<WINDOW_SIZE)?0:cursor-WINDOW_SIZE, cursor-1));
-//                if match succeeded then
-                if (match >= 0) {
-//                    prevMatch <- match
-                    prevMatch = match;
-//                    lookahead <- lookahead + 1
-                    lookAHead++;
-//                else
-                }else {
-//                    output( [suitable value for prevMatch, lookahead, text[cursor+lookahead ]])
-                    out.append("[").append(prevMatch).append(",").append(lookAHead).append(",").append(input.charAt(cursor+lookAHead)).append("]");
-//                    cursor <- cursor + lookahead + 1
-                    cursor = cursor + lookAHead + 1;
-//                break
-                    break;
+        while (cursor < charArray.length) {
+            char c = charArray[cursor];
+            behind = (input.substring(0,cursor+1));
+            int curMatch = 0;
+            int curMatchLength = -1;
+            for (int i = cursor ; i < input.length(); i++) {
+                String search = input.substring(cursor, i);
+                int match = behind.indexOf(search);
+                int matchLength = search.length();
+                if (match >= 0 && matchLength > curMatchLength) {
+                    curMatchLength = matchLength;
+                    curMatch = match;
                 }
+            }
+            if (curMatch - cursor == 0) {
+                out.append(createTuple(curMatch - cursor, curMatchLength-1, String.valueOf(c)));
+            } else if (cursor+curMatchLength < charArray.length){
+                out.append(createTuple(curMatch - cursor, curMatchLength, String.valueOf(charArray[cursor+curMatchLength])));
+                cursor++;
+            }
+            
+            cursor += curMatchLength;
+            if (cursor >= charArray.length-1){
+                out.append(createTuple(0, 0, String.valueOf(charArray[cursor])));
+                break;
             }
         }
 
         return out.toString();
+       
+    }
+    
+    /**
+     * creates a tuple equal to [a,b,c]
+     * @return the tuple
+     */
+    public static String createTuple(int a, int b, String c){
+        return "["+a+","+b+","+c+"]";
     }
 
     /**
@@ -69,7 +59,22 @@ public class LempelZiv {
      * text string.
      */
     public String decompress(String compressed) {
-        return compressed;
+        Scanner in = new Scanner(compressed);
+        in.useDelimiter("]\\[|\\[|\\]|,");
+        StringBuilder out = new StringBuilder();
+        while (in.hasNext()){
+            int index = out.length();
+            int first = in.nextInt();
+            int second = in.nextInt();
+            String characters = in.next();
+            if (first == 0 && second == 0){
+                out.append(characters);
+            } else {
+                out.append(out.substring(index+first,index+first+second));
+                out.append(characters);
+            }
+        }
+        return out.toString();
     }
 
     /**
@@ -84,6 +89,13 @@ public class LempelZiv {
 
     public static void main(String args[]){
         LempelZiv lempelZiv = new LempelZiv();
-        System.out.println(lempelZiv.compress("aaaaaaaaaaaa"));
+        String compressed = lempelZiv.compress("What about a larger chunk");
+        System.out.println(compressed);
+//        Scanner in = new Scanner(compressed);
+//        in.useDelimiter("]\\[|\\[|]|,");
+//        while (in.hasNext()){
+//            System.out.println(in.next());
+//        }
+        System.out.println(lempelZiv.decompress(compressed));
     }
 }
