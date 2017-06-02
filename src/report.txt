@@ -94,3 +94,35 @@ War and Peace after Huffman coding
     (: 1111101111111
     p: 1111110
     ,: 1111111
+
+Question 3: Consider the Huffman coding of war_and_peace.txt, taisho.txt, and pi.txt.
+Which of these achieves the best encoding, i.e. the best reduction in size? What makes some
+of the encodings better than others?
+    War and peace:
+        input length:  3258246 bytes
+        output length: 1848598 bytes
+        out = 54% in
+    taisho:
+        input length:  3649944 bytes
+        output length: 1542656 bytes
+        out = 42% in
+    pi:
+        input length:  1010003 bytes
+        output length: 443632 bytes
+        out = 44% in
+     taisho achieves the best encoding. Better encoding will be achieved with fewer distinct characters. The less characters
+     there are to encode the fewer bits each one will take up. i.e. lots of different characters with approximately the
+      same usage will take up more room than few repeated characters.
+
+Question 4: The Lempel-Ziv algorithm has a parameter: the size of the sliding window.
+On a text of your choice, how does changing the window size affect the quality of the
+compression?
+    Increasing the size of the window will increase the efficiency of the compression. For example if the window covered
+    the entire size of the text you would get the best compression possible by the algorithm. But the larger the window size
+    the longer it will take to compress.
+
+Question 5: What happens if you Huffman encode War and Peace before applying LempelZiv
+compression to it? Do you get a smaller file size (in characters) overall?
+    Huffman then LempelZiv: output length: 16482972 characters
+    just LempelZiv:         output length: 11029051 characters
+    The charactere count goes up.
